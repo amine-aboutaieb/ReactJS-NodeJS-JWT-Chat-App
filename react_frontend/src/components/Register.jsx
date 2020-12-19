@@ -20,7 +20,7 @@ function Register({ history }) {
       pwd !== null
     ) {
       axios
-        .post("http://localhost:5500/api/user/register", {
+        .post("api/user/register", {
           firstName,
           lastName,
           email,

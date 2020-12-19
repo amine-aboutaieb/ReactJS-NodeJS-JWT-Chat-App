@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import stateContext from "./StateContext";
 
 function NavBar() {
+  const { globalState, dispatch } = useContext(stateContext);
+  const { isLogedIn } = globalState;
+
   return (
     <nav>
       <NavLink exact to="/">
         Home
       </NavLink>
-      {localStorage.getItem("auth_token") ? (
+      {isLogedIn ? (
         <NavLink exact to="/app">
           App
         </NavLink>

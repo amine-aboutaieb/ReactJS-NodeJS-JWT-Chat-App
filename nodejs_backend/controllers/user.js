@@ -38,7 +38,7 @@ module.exports = {
                         if(error){
                             res.status(500).json({message : "Internal server error"});
                         }else{
-                            res.status(200).json({message : "Account authenticated successfully", token : token});
+                            res.status(200).json({message : "Account authenticated successfully", token : token, firstName, lastName, email});
                         }
                     });
                 }

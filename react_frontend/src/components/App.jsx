@@ -7,19 +7,25 @@ import Error from "./Error";
 import NavBar from "./NavBar";
 import ChatApp from "./ChatApp";
 import ProtectedRoute from "./ProtectedRoute";
+import StateContext from "./StateContext";
+import StateReducer from "./StateReducer";
 
 function App() {
+  const [globalState, dispatch] = StateReducer();
+
   return (
     <div>
       <BrowserRouter>
-        <NavBar />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <ProtectedRoute path="/app" component={ChatApp} />
-          <Route path="/" component={Error} />
-        </Switch>
+        <StateContext.Provider value={{ globalState, dispatch }}>
+          <NavBar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <ProtectedRoute path="/app" component={ChatApp} />
+            <Route path="/" component={Error} />
+          </Switch>
+        </StateContext.Provider>
       </BrowserRouter>
     </div>
   );

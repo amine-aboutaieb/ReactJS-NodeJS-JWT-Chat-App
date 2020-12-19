@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
+import stateContext from "./StateContext";
 
 function ProtectedRoute({ component, path }) {
-  if (localStorage.getItem("auth_token") === null) {
+  const { globalState } = useContext(stateContext);
+  const { isLogedIn } = globalState;
+  if (!isLogedIn) {
     return <Redirect to="/login" />;
   } else {
     return <Route exact path={path} component={component} />;
