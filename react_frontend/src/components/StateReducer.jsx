@@ -5,6 +5,8 @@ function reducer(state, action) {
   if (type === "setStateData") {
     const { firstName, lastName, email } = action;
     return { ...state, firstName, lastName, email, isLogedIn: true };
+  } else if (type === "clearState") {
+    return { firstName: null, lastName: null, email: null, isLogedIn: false };
   }
 }
 

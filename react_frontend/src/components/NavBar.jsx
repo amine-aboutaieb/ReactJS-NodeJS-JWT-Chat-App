@@ -12,9 +12,14 @@ function NavBar() {
         Home
       </NavLink>
       {isLogedIn ? (
-        <NavLink exact to="/app">
-          App
-        </NavLink>
+        <>
+          <NavLink exact to="/app">
+            App
+          </NavLink>
+          <NavLink exact to="/logout">
+            Logout
+          </NavLink>
+        </>
       ) : (
         <>
           <NavLink exact to="/register">
