@@ -16,10 +16,23 @@ function Login({ history }) {
           pwd,
         })
         .then((response) => {
-          const { token, message, firstName, lastName, email } = response.data;
+          const {
+            token,
+            message,
+            firstName,
+            lastName,
+            email,
+            username,
+          } = response.data;
           alert(message);
           localStorage.setItem("auth_token", token);
-          dispatch({ type: "setStateData", firstName, lastName, email });
+          dispatch({
+            type: "setStateData",
+            firstName,
+            lastName,
+            email,
+            username,
+          });
           history.push("/app");
         })
         .catch((error) => {
@@ -31,28 +44,25 @@ function Login({ history }) {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form action="/login" method="post">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email..."
-          onChange={(e) => {
-            setLoginState({ ...loginState, email: e.target.value });
-          }}
-        />
-        <input
-          type="text"
-          name="pwd"
-          placeholder="Password..."
-          onChange={(e) => {
-            setLoginState({ ...loginState, pwd: e.target.value });
-          }}
-        />
-        <button onClick={handleLogin}>Login</button>
-      </form>
-    </div>
+    <form action="/login" method="post" id="loginForm">
+      <input
+        type="email"
+        name="email"
+        placeholder="Email..."
+        onChange={(e) => {
+          setLoginState({ ...loginState, email: e.target.value });
+        }}
+      />
+      <input
+        type="text"
+        name="pwd"
+        placeholder="Password..."
+        onChange={(e) => {
+          setLoginState({ ...loginState, pwd: e.target.value });
+        }}
+      />
+      <button onClick={handleLogin}>Login</button>
+    </form>
   );
 }
 

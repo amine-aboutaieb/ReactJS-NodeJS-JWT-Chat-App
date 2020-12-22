@@ -3,10 +3,23 @@ import React, { useReducer } from "react";
 function reducer(state, action) {
   const { type } = action;
   if (type === "setStateData") {
-    const { firstName, lastName, email } = action;
-    return { ...state, firstName, lastName, email, isLogedIn: true };
+    const { firstName, lastName, email, username } = action;
+    return {
+      ...state,
+      firstName,
+      lastName,
+      email,
+      username: username,
+      isLogedIn: true,
+    };
   } else if (type === "clearState") {
-    return { firstName: null, lastName: null, email: null, isLogedIn: false };
+    return {
+      firstName: null,
+      lastName: null,
+      email: null,
+      username: null,
+      isLogedIn: false,
+    };
   }
 }
 
@@ -15,6 +28,7 @@ function StateReducer() {
     email: null,
     firstName: null,
     lastName: null,
+    username: null,
     isLogedIn: false,
   });
 

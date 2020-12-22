@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "../index.css";
 import axios from "axios";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Home";
@@ -12,6 +13,7 @@ import PublicRoute from "./PublicRoute";
 import StateContext from "./StateContext";
 import StateReducer from "./StateReducer";
 import Logout from "./Logout";
+import SearchForFriends from "./SearchForFriends";
 
 function App() {
   useEffect(() => {
@@ -19,11 +21,16 @@ function App() {
       axios
         .post("api/user/state/data")
         .then((response) => {
-          const { firstName, lastName, email } = response.data;
-          dispatch({ type: "setStateData", firstName, lastName, email });
+          const { firstName, lastName, email, username } = response.data;
+          dispatch({
+            type: "setStateData",
+            firstName,
+            lastName,
+            email,
+            username,
+          });
         })
         .catch((error) => {
-          console.log(localStorage.getItem("auth_token"));
           localStorage.clear();
           dispatch({ type: "clearState" });
         });
@@ -33,15 +40,16 @@ function App() {
   const [globalState, dispatch] = StateReducer();
 
   return (
-    <div>
+    <div id="AppContainer">
       <BrowserRouter>
         <StateContext.Provider value={{ globalState, dispatch }}>
           <NavBar />
           <Switch>
-            <Route exact path="/" component={Home} />
+            <ProtectedRoute exact path="/" component={ChatApp} />
             <PublicRoute path="/register" component={Register} />
             <PublicRoute path="/login" component={Login} />
             <ProtectedRoute path="/app" component={ChatApp} />
+            <ProtectedRoute path="/search" component={SearchForFriends} />
             <ProtectedRoute path="/logout" component={Logout} />
             <Route path="/" component={Error} />
           </Switch>

@@ -7,23 +7,26 @@ function Register({ history }) {
     firstName: null,
     lastName: null,
     email: null,
+    username: null,
     pwd: null,
   });
 
   const handleRegistration = (e) => {
     e.preventDefault();
-    const { firstName, lastName, email, pwd } = registerState;
+    const { firstName, lastName, email, pwd, username } = registerState;
     if (
       firstName !== null &&
       lastName !== null &&
       email !== null &&
-      pwd !== null
+      pwd !== null &&
+      username !== null
     ) {
       axios
         .post("api/user/register", {
           firstName,
           lastName,
           email,
+          username,
           pwd,
         })
         .then((response) => {
@@ -41,44 +44,49 @@ function Register({ history }) {
   };
 
   return (
-    <div>
-      <h1>Register Form</h1>
-      <form action="/register" method="post">
-        <input
-          type="text"
-          name="firstName"
-          placeholder="First Name..."
-          onChange={(e) => {
-            setRegisterState({ ...registerState, firstName: e.target.value });
-          }}
-        />
-        <input
-          type="text"
-          name="lastName"
-          placeholder="Last Name..."
-          onChange={(e) => {
-            setRegisterState({ ...registerState, lastName: e.target.value });
-          }}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email..."
-          onChange={(e) => {
-            setRegisterState({ ...registerState, email: e.target.value });
-          }}
-        />
-        <input
-          type="text"
-          name="pwd"
-          placeholder="Password..."
-          onChange={(e) => {
-            setRegisterState({ ...registerState, pwd: e.target.value });
-          }}
-        />
-        <button onClick={handleRegistration}>Create Account</button>
-      </form>
-    </div>
+    <form action="/register" method="post" id="registerForm">
+      <input
+        type="text"
+        name="firstName"
+        placeholder="First Name..."
+        onChange={(e) => {
+          setRegisterState({ ...registerState, firstName: e.target.value });
+        }}
+      />
+      <input
+        type="text"
+        name="lastName"
+        placeholder="Last Name..."
+        onChange={(e) => {
+          setRegisterState({ ...registerState, lastName: e.target.value });
+        }}
+      />
+      <input
+        type="text"
+        name="username"
+        placeholder="Username..."
+        onChange={(e) => {
+          setRegisterState({ ...registerState, username: e.target.value });
+        }}
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email..."
+        onChange={(e) => {
+          setRegisterState({ ...registerState, email: e.target.value });
+        }}
+      />
+      <input
+        type="text"
+        name="pwd"
+        placeholder="Password..."
+        onChange={(e) => {
+          setRegisterState({ ...registerState, pwd: e.target.value });
+        }}
+      />
+      <button onClick={handleRegistration}>Create Account</button>
+    </form>
   );
 }
 

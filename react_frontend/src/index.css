@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+body {
+  background-color: #1f1f23;
+}
+
+#AppContainer {
+  height: 100%;
+}
+
+nav {
+  background-color: #18181b;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2% 0;
+  box-shadow: 0px 0px 5px black;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 1.5em;
+}
+
+.active {
+  border-bottom: 4px solid #9147ff;
+  font-style: italic;
+}
+
+#registerForm,
+#loginForm {
+  width: 40vw;
+  height: 50vh;
+  background-color: rgb(219, 216, 216);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 5% auto 0 auto;
+  box-shadow: 1px 1px 20px black;
+}
+
+#registerForm input,
+#registerForm button,
+#loginForm input,
+#loginForm button {
+  width: 80%;
+  padding: 2%;
+  font-size: 1em;
+  outline-color: #9147ff;
+}
+
+#registerForm button,
+#loginForm button {
+  background-color: #9147ff;
+  color: white;
+}
+
+#registerForm button:hover,
+#loginForm button:hover {
+  background-color: #551bad;
+}
+
+#error404 {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+#usersSearchInput {
+  font-size: 1.4em;
+  padding: 0.5% 1%;
+  border: none;
+  font-style: italic;
+  width: 80%;
+  height: 20%;
+  display: block;
+  margin: 4% auto 2% auto;
+}
+#usersSearchInput:focus {
+  outline-color: #9147ff;
+}
+#mainSearchContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 40vh;
+  width: 70vw;
+  margin: 0 auto;
+}
+
+#usersSearchResults {
+  width: 90%;
+}
+
+#usersSearchResults div {
+  background-color: #18181b;
+  color: white;
+  margin: 1% 0;
+  padding: 1.2%;
+  display: flex;
+  flex-direction: column;
+}
+
+#usersSearchResults p {
+  font-size: 1.1em;
+}
+
+#usersSearchResults small {
+  align-self: flex-end;
+  font-style: italic;
+}
+
+#usersSearchResults div:hover {
+  background-color: #0d0d0e;
+  cursor: pointer;
+}
+
+#globalSearchContainer {
+}

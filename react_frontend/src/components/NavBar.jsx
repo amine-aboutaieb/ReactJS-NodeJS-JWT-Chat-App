@@ -8,13 +8,16 @@ function NavBar() {
 
   return (
     <nav>
-      <NavLink exact to="/">
+      {/* <NavLink exact to="/" activeClassName="active">
         Home
-      </NavLink>
+      </NavLink> */}
       {isLogedIn ? (
         <>
-          <NavLink exact to="/app">
+          <NavLink exact to="/app" activeClassName="active">
             App
+          </NavLink>
+          <NavLink exact to="/search" activeClassName="active">
+            Search for friends
           </NavLink>
           <NavLink exact to="/logout">
             Logout
@@ -22,7 +25,7 @@ function NavBar() {
         </>
       ) : (
         <>
-          <NavLink exact to="/register">
+          <NavLink exact to="/register" activeClassName="active">
             Register
           </NavLink>
           <NavLink exact to="/login">
