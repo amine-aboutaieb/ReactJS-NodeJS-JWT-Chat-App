@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import stateContext from "./StateContext";
+import API from "./AxiosInstance";
 
 function Login({ history }) {
   const [loginState, setLoginState] = useState({ email: null, pwd: null });
@@ -10,11 +11,10 @@ function Login({ history }) {
     e.preventDefault();
     const { email, pwd } = loginState;
     if (email !== null && pwd !== null) {
-      axios
-        .post("api/user/login", {
-          email,
-          pwd,
-        })
+      API.post("api/user/login", {
+        email,
+        pwd,
+      })
         .then((response) => {
           const {
             token,

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import API from "./AxiosInstance";
 
 function Register({ history }) {
   const [registerState, setRegisterState] = useState({
@@ -21,14 +22,13 @@ function Register({ history }) {
       pwd !== null &&
       username !== null
     ) {
-      axios
-        .post("api/user/register", {
-          firstName,
-          lastName,
-          email,
-          username,
-          pwd,
-        })
+      API.post("api/user/register", {
+        firstName,
+        lastName,
+        email,
+        username,
+        pwd,
+      })
         .then((response) => {
           console.log(response.data);
           alert(response.data.message);

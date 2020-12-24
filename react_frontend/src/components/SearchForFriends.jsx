@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import StateContext from "./StateContext";
-import { Redirect } from "react-router-dom";
+import API from "./AxiosInstance";
 
 function SearchForFriends({ history }) {
   const [usersState, setUsersState] = useState([]);
@@ -11,8 +11,13 @@ function SearchForFriends({ history }) {
     let searchedStr = e.target.value;
     let pattern = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     if (pattern.test(searchedStr) === false && searchedStr !== "") {
-      axios
-        .get(`api/user/search`, { method: "GET", params: { str: searchedStr } })
+      API.get(`api/user/search`, {
+        method: "GET",
+        params: { str: searchedStr },
+        // headers: {
+        //   "x-authentication-token": localStorage.getItem("auth_token"),
+        // },
+      })
         .then(({ data }) => {
           if (data.users.length > 0) {
             setUsersState(data.users);

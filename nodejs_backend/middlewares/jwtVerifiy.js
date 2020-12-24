@@ -6,6 +6,7 @@ function verifiy(req, res, next) {
   if (token) {
     jwt.verify(token, jwt_secret, (error, decoded) => {
       if (error) {
+        console.log(error);
         res.status(400).json({ message: "Invalid authentication token" });
       } else {
         req.userData = decoded;

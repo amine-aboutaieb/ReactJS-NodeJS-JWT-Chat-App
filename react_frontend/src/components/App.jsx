@@ -14,12 +14,12 @@ import StateContext from "./StateContext";
 import StateReducer from "./StateReducer";
 import Logout from "./Logout";
 import SearchForFriends from "./SearchForFriends";
+import API from "./AxiosInstance";
 
 function App() {
   useEffect(() => {
     if (localStorage.getItem("auth_token") !== null) {
-      axios
-        .post("api/user/state/data")
+      API.post("api/user/state/data")
         .then((response) => {
           const { firstName, lastName, email, username } = response.data;
           dispatch({

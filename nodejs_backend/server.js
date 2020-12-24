@@ -5,12 +5,10 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended : true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/user", require("./routes/user"));
 
-
-
-app.listen(port, ()=>{
-    console.log(`listening on ${port}`);
+app.listen(port, () => {
+  console.log(`listening on ${port}`);
 });
