@@ -6,7 +6,6 @@ import API from "./AxiosInstance";
 function Login({ history }) {
   const [loginState, setLoginState] = useState({ email: null, pwd: null });
   const { globalState, dispatch } = useContext(stateContext);
-
   const handleLogin = (e) => {
     e.preventDefault();
     const { email, pwd } = loginState;

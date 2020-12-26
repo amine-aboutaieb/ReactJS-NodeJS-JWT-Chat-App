@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import stateContext from "./StateContext";
+import LogedInData from "./LogedInData";
 
 function NavBar() {
   const { globalState, dispatch } = useContext(stateContext);
@@ -8,9 +9,11 @@ function NavBar() {
 
   return (
     <nav>
+      <LogedInData />
       {/* <NavLink exact to="/" activeClassName="active">
         Home
       </NavLink> */}
+
       {isLogedIn ? (
         <>
           <NavLink exact to="/app" activeClassName="active">
@@ -19,6 +22,7 @@ function NavBar() {
           <NavLink exact to="/search" activeClassName="active">
             Search for friends
           </NavLink>
+
           <NavLink exact to="/logout">
             Logout
           </NavLink>

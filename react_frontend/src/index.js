@@ -9,7 +9,6 @@ API.interceptors.request.use(
     config.headers["x-authentication-token"] = localStorage.getItem(
       "auth_token"
     );
-    console.log(config.headers["x-authentication-token"]);
     return config;
   },
   (error) => {

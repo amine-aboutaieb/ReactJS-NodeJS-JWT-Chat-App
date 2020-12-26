@@ -19,4 +19,8 @@ router.get("/search", verify, (req, res) => {
   UserController.searchForUsers(req, res);
 });
 
+router.get("/profile/data", verify, (req, res) => {
+  UserController.getProfileData(req, res);
+});
+
 module.exports = router;

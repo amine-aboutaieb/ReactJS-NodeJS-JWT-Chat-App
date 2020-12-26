@@ -7,21 +7,21 @@ function SearchForFriends({ history }) {
   const [usersState, setUsersState] = useState([]);
   const [inputFocus, setInputFocus] = useState(true);
   const { dispatch } = useContext(StateContext);
+  const [noDataMsg, setNoDataMsg] = useState(false);
   const handleSearchInput = (e) => {
+    setNoDataMsg(false);
     let searchedStr = e.target.value;
-    let pattern = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    let pattern = /[ `!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/;
     if (pattern.test(searchedStr) === false && searchedStr !== "") {
       API.get(`api/user/search`, {
         method: "GET",
         params: { str: searchedStr },
-        // headers: {
-        //   "x-authentication-token": localStorage.getItem("auth_token"),
-        // },
       })
         .then(({ data }) => {
           if (data.users.length > 0) {
             setUsersState(data.users);
           } else {
+            setNoDataMsg(true);
             setUsersState([]);
           }
         })
@@ -35,7 +35,7 @@ function SearchForFriends({ history }) {
     }
   };
   const handleOutOfForm = () => {
-    console.log("called");
+    setNoDataMsg(false);
     if (inputFocus) {
       setUsersState([]);
     }
@@ -66,7 +66,10 @@ function SearchForFriends({ history }) {
                     setInputFocus(true);
                   }}
                   onClick={() => {
-                    history.push(`/user/${id}`);
+                    history.push({
+                      pathname: `/user/${username}`,
+                      state: username,
+                    });
                   }}
                 >
                   <p>{username}</p>
@@ -76,6 +79,7 @@ function SearchForFriends({ history }) {
                 </div>
               );
             })}
+          {noDataMsg && <h3 id="noDataMsg">No data found</h3>}
         </div>
       </div>
     </div>

@@ -66,4 +66,32 @@ module.exports = {
       );
     });
   },
+  getProfileData: (userName, id) => {
+    return new Promise((resolve, reject) => {
+      let username = dbConnection.escape(userName);
+      dbConnection.query(
+        `SELECT id, firstName, lastName, email FROM users WHERE username LIKE ${username}`,
+        (error, result1) => {
+          if (error) {
+            reject(error);
+          } else {
+            if (result1.length > 0) {
+              dbConnection.query(
+                `SELECT COUNT(*) AS num FROM follows WHERE follower = ${id} AND followed = ${result1[0].id}`,
+                (error, result2) => {
+                  if (error) {
+                    reject(error);
+                  } else {
+                    resolve({ data: result1[0], followed: result2[0].num });
+                  }
+                }
+              );
+            } else {
+              reject("empty");
+            }
+          }
+        }
+      );
+    });
+  },
 };

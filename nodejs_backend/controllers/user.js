@@ -1,5 +1,6 @@
 const UserModel = require("../models/user");
 const jwt = require("jsonwebtoken");
+const user = require("../models/user");
 const jwt_secret = require("config").get("jwt_secret");
 
 module.exports = {
@@ -83,5 +84,19 @@ module.exports = {
         console.log(error);
         res.status(500).json({ message: "Internal server error" });
       });
+  },
+  getProfileData: (req, res) => {
+    let username = req.query.username;
+    console.log(username);
+    if (username !== "") {
+      UserModel.getProfileData(username, req.userData.id)
+        .then((result) => {
+          res.status(200).json({ message: "profile data", payload: result });
+        })
+        .catch((error) => {
+          console.log(error);
+          res.status(500).json({ message: "Internal server error" });
+        });
+    }
   },
 };

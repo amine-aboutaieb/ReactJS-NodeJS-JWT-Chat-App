@@ -32,11 +32,12 @@ nav a {
   color: white;
   text-decoration: none;
   font-weight: bolder;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 .active {
-  border-bottom: 4px solid #9147ff;
+  padding-bottom: 5px;
+  border-bottom: 3px solid #9147ff;
   font-style: italic;
 }
 
@@ -133,5 +134,32 @@ nav a {
   cursor: pointer;
 }
 
-#globalSearchContainer {
+#noDataMsg {
+  color: white;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-style: italic;
+}
+
+#logedInTitle {
+  color: white;
+  color: #ab7bf3;
+  font-weight: bolder;
+  /* font-size: 1.9em; */
+  position: relative;
+  cursor: crosshair;
+}
+
+#logedInDataContainer {
+  margin-top: 0.5%;
+  padding: 0 10px;
+  position: absolute;
+  height: 20vh;
+  background-color: #131318;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
 }

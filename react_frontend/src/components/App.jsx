@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "../index.css";
-import axios from "axios";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
@@ -15,6 +14,7 @@ import StateReducer from "./StateReducer";
 import Logout from "./Logout";
 import SearchForFriends from "./SearchForFriends";
 import API from "./AxiosInstance";
+import UserProfile from "./UserProfile";
 
 function App() {
   useEffect(() => {
@@ -44,12 +44,14 @@ function App() {
       <BrowserRouter>
         <StateContext.Provider value={{ globalState, dispatch }}>
           <NavBar />
+
           <Switch>
             <ProtectedRoute exact path="/" component={ChatApp} />
             <PublicRoute path="/register" component={Register} />
             <PublicRoute path="/login" component={Login} />
             <ProtectedRoute path="/app" component={ChatApp} />
             <ProtectedRoute path="/search" component={SearchForFriends} />
+            <ProtectedRoute path="/user/:username" component={UserProfile} />
             <ProtectedRoute path="/logout" component={Logout} />
             <Route path="/" component={Error} />
           </Switch>

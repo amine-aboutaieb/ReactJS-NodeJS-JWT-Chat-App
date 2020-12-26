@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
 import StateContext from "./StateContext";
 
-function PublicRoute({ path, component }) {
+function PublicRoute(props) {
   const { globalState } = useContext(StateContext);
   const { isLogedIn } = globalState;
-  if (isLogedIn) {
-    return <Redirect to="/app" />;
+  if (!isLogedIn) {
+    return <Route exact path={props.path} component={props.component} />;
   } else {
-    return <Route exact path={path} component={component} />;
+    return <Redirect to={{ pathname: props.location.state.pathname }} />;
   }
 }
 

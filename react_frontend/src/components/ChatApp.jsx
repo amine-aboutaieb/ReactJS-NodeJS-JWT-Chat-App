@@ -6,11 +6,11 @@ function ChatApp() {
   const { firstName, lastName, email, username } = globalState;
   return (
     <div>
-      <h1>Chat App</h1>
+      {/* <h1>Chat App</h1>
       <p>Email : {email}</p>
       <p>Username : {username}</p>
       <p>First Name : {firstName}</p>
-      <p>Last Name : {lastName}</p>
+      <p>Last Name : {lastName}</p> */}
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React from "react";
 
 function Error({ location }) {
-  console.log(location);
   return (
     <div id="error404">
       <h1>Error 404</h1>
