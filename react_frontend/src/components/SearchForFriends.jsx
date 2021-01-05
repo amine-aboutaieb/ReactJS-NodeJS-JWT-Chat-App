@@ -6,7 +6,7 @@ import API from "./AxiosInstance";
 function SearchForFriends({ history }) {
   const [usersState, setUsersState] = useState([]);
   const [inputFocus, setInputFocus] = useState(true);
-  const { dispatch } = useContext(StateContext);
+  const { globalState, dispatch } = useContext(StateContext);
   const [noDataMsg, setNoDataMsg] = useState(false);
   const handleSearchInput = (e) => {
     setNoDataMsg(false);
@@ -56,28 +56,30 @@ function SearchForFriends({ history }) {
           {usersState.length > 0 &&
             usersState.map((user, index) => {
               const { id, firstName, lastName, username } = user;
-              return (
-                <div
-                  key={id}
-                  onMouseOver={() => {
-                    setInputFocus(false);
-                  }}
-                  onMouseOut={() => {
-                    setInputFocus(true);
-                  }}
-                  onClick={() => {
-                    history.push({
-                      pathname: `/user/${username}`,
-                      state: username,
-                    });
-                  }}
-                >
-                  <p>{username}</p>
-                  <small>
-                    {firstName} {lastName}
-                  </small>
-                </div>
-              );
+              if (username !== globalState.username) {
+                return (
+                  <div
+                    key={id}
+                    onMouseOver={() => {
+                      setInputFocus(false);
+                    }}
+                    onMouseOut={() => {
+                      setInputFocus(true);
+                    }}
+                    onClick={() => {
+                      history.push({
+                        pathname: `/user/${username}`,
+                        state: username,
+                      });
+                    }}
+                  >
+                    <p>{username}</p>
+                    <small>
+                      {firstName} {lastName}
+                    </small>
+                  </div>
+                );
+              }
             })}
           {noDataMsg && <h3 id="noDataMsg">No data found</h3>}
         </div>

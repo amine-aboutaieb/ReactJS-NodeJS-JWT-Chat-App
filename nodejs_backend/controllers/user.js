@@ -1,6 +1,5 @@
 const UserModel = require("../models/user");
 const jwt = require("jsonwebtoken");
-const user = require("../models/user");
 const jwt_secret = require("config").get("jwt_secret");
 
 module.exports = {
@@ -98,5 +97,25 @@ module.exports = {
           res.status(500).json({ message: "Internal server error" });
         });
     }
+  },
+  followUser: (req, res) => {
+    let { id } = req.body;
+    UserModel.followUser(req.userData.id, id)
+      .then(() => {
+        res.status(200).json({ message: "user followed" });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  unFollowUser: (req, res) => {
+    let { id } = req.body;
+    UserModel.unFollowUser(req.userData.id, id)
+      .then(() => {
+        res.status(200).json({ message: "user unfollowed" });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };

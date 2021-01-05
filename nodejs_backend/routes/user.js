@@ -23,4 +23,12 @@ router.get("/profile/data", verify, (req, res) => {
   UserController.getProfileData(req, res);
 });
 
+router.post("/profile/follow", verify, (req, res) => {
+  UserController.followUser(req, res);
+});
+
+router.post("/profile/unfollow", verify, (req, res) => {
+  UserController.unFollowUser(req, res);
+});
+
 module.exports = router;

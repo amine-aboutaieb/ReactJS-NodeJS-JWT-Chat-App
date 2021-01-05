@@ -65,13 +65,15 @@ nav a {
 }
 
 #registerForm button,
-#loginForm button {
+#loginForm button,
+.profileFollowBtns {
   background-color: #9147ff;
   color: white;
 }
 
 #registerForm button:hover,
-#loginForm button:hover {
+#loginForm button:hover,
+.profileFollowBtns:hover {
   background-color: #551bad;
 }
 
@@ -162,4 +164,25 @@ nav a {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
+}
+
+#userProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 60vh;
+  color: white;
+}
+
+#profileNameSpan {
+  color: #9147ff;
+}
+
+.profileFollowBtns {
+  padding: 10px;
+  width: 25%;
+  height: 10vh;
+  font-size: 1.3em;
+  outline: none;
 }

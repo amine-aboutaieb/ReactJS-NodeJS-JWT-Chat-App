@@ -70,7 +70,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       let username = dbConnection.escape(userName);
       dbConnection.query(
-        `SELECT id, firstName, lastName, email FROM users WHERE username LIKE ${username}`,
+        `SELECT id, firstName, lastName, email, username FROM users WHERE username LIKE ${username}`,
         (error, result1) => {
           if (error) {
             reject(error);
@@ -88,6 +88,68 @@ module.exports = {
               );
             } else {
               reject("empty");
+            }
+          }
+        }
+      );
+    });
+  },
+  followUser: (follower, followed) => {
+    return new Promise((resolve, reject) => {
+      dbConnection.query(
+        `SELECT COUNT(*) AS NUM FROM follows WHERE follower = ${parseInt(
+          dbConnection.escape(follower)
+        )} AND followed = ${parseInt(dbConnection.escape(followed))};`,
+        (error, result1) => {
+          if (error) {
+            reject(error);
+          } else {
+            if (result1[0].NUM === 0) {
+              dbConnection.query(
+                `INSERT INTO follows VALUES(NULL, ${parseInt(
+                  dbConnection.escape(follower)
+                )}, ${parseInt(dbConnection.escape(followed))}, NOW());`,
+                (error) => {
+                  if (error) {
+                    reject(error);
+                  } else {
+                    resolve();
+                  }
+                }
+              );
+            } else {
+              reject("already followed");
+            }
+          }
+        }
+      );
+    });
+  },
+  unFollowUser: (follower, followed) => {
+    return new Promise((resolve, reject) => {
+      dbConnection.query(
+        `SELECT COUNT(*) AS NUM FROM follows WHERE follower = ${parseInt(
+          dbConnection.escape(follower)
+        )} AND followed = ${parseInt(dbConnection.escape(followed))};`,
+        (error, result1) => {
+          if (error) {
+            reject(error);
+          } else {
+            if (result1[0].NUM !== 0) {
+              dbConnection.query(
+                `DELETE FROM follows WHERE follower = ${parseInt(
+                  dbConnection.escape(follower)
+                )} AND followed = ${parseInt(dbConnection.escape(followed))};`,
+                (error) => {
+                  if (error) {
+                    reject(error);
+                  } else {
+                    resolve();
+                  }
+                }
+              );
+            } else {
+              reject("not followed");
             }
           }
         }
